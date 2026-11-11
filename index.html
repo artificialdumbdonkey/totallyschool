@@ -9,31 +9,56 @@
       type="font/woff2"
       crossorigin="anonymous"
     />
-    <link
-      rel="preload"
-      href="images/logo.svg"
-      as="image"
-      type="image/svg+xml"
-    />
-    <link
-      rel="preload"
-      href="images/discord.svg"
-      as="image"
-      type="image/svg+xml"
-    />
+    <link rel="preload" href="images/logo.svg" as="image" type="image/svg+xml" />
+    <link rel="preload" href="images/discord.svg" as="image" type="image/svg+xml" />
     <link rel="manifest" href="manifest.json" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no" />
     <title>Home | Schoology</title>
-    <link rel="icon" type="image/png" href="https://resources.finalsite.net/images/f_auto,q_auto/v1626100427/k12albemarleorg/uj41eppe27bunrvhwnep/PowerSchoolLogos_Vertical-01.png">    <script defer="defer" src="error_screen.bundle.js"></script>
-
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no"
-    />
+    <link rel="icon" type="image/png" href="https://resources.finalsite.net/images/f_auto,q_auto/v1626100427/k12albemarleorg/uj41eppe27bunrvhwnep/PowerSchoolLogos_Vertical-01.png" />
     <script defer="defer" src="main.bundle.js"></script>
+    <style>
+      #welcome-image-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: rgba(0, 0, 0, 0.88);
+      }
+
+      #welcome-image-overlay img {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+
+      #welcome-image-overlay[hidden] {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <canvas id="screen"></canvas>
     <div id="ui"></div>
     <div id="transition-layer"></div>
+
+    <div id="welcome-image-overlay" role="img" aria-label="Welcome image">
+      <img src="images/car_thumbnail_placeholder.png" alt="Welcome" />
+    </div>
+    <script>
+      (() => {
+        const overlay = document.getElementById("welcome-image-overlay");
+        window.addEventListener("keydown", (event) => {
+          if (event.code !== "Space" || event.repeat) return;
+          event.preventDefault();
+          overlay.hidden = !overlay.hidden;
+        });
+      })();
+    </script>
   </body>
 </html>
+
+
+
